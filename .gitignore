@@ -1,0 +1,9 @@
+/.idea
+/build
+/logs
+/data
+
+.DS_Store
+/cloudflarebeat
+/cloudflarebeat.test
+*.pyc

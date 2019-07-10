@@ -1,0 +1,563 @@
+
+////
+This file is generated! See _meta/fields.yml and scripts/generate_field_docs.py
+////
+
+[[exported-fields]]
+= Exported fields
+
+[partintro]
+
+--
+This document describes the fields that are exported by cloudflarebeat. They are
+grouped in the following categories:
+
+* <<exported-fields-beat>>
+* <<exported-fields-cloudflarebeat>>
+
+--
+[[exported-fields-beat]]
+== Beat fields
+
+Contains common beat fields available in all event types.
+
+
+
+[float]
+=== `beat.name`
+
+The name of the Beat sending the log messages. If the Beat name is set in the configuration file, then that value is used. If it is not set, the hostname is used. To set the Beat name, use the `name` option in the configuration file.
+
+
+[float]
+=== `beat.hostname`
+
+The hostname as returned by the operating system on which the Beat is running.
+
+
+[float]
+=== `beat.timezone`
+
+The timezone as returned by the operating system on which the Beat is running.
+
+
+[float]
+=== `beat.version`
+
+The version of the beat that generated this event.
+
+
+[float]
+=== `@timestamp`
+
+type: date
+
+example: August 26th 2016, 12:35:53.332
+
+format: date
+
+required: True
+
+The timestamp when the event log record was generated.
+
+
+[float]
+=== `tags`
+
+Arbitrary tags that can be set per Beat and per transaction type.
+
+
+[float]
+=== `fields`
+
+type: object
+
+Contains user configurable fields.
+
+
+[float]
+== error fields
+
+Error fields containing additional info in case of errors.
+
+
+
+[float]
+=== `error.message`
+
+type: text
+
+Error message.
+
+
+[float]
+=== `error.code`
+
+type: long
+
+Error code.
+
+
+[float]
+=== `error.type`
+
+type: keyword
+
+Error type.
+
+
+[[exported-fields-cloudflarebeat]]
+== cloudflarebeat fields
+
+None
+
+
+[float]
+=== `CacheCacheStatus`
+
+type: keyword
+
+required: True
+
+unknown | miss | expired | updating | stale | hit | ignored | bypass | revalidated
+
+[float]
+=== `CacheResponseBytes`
+
+type: integer
+
+required: True
+
+Number of bytes returned by the cache
+
+[float]
+=== `CacheResponseStatus`
+
+type: short
+
+required: True
+
+HTTP status code returned by the cache to the edge: all requests (including non-cacheable ones) go through the cache: also see CacheStatus field
+
+[float]
+=== `CacheTieredFill`
+
+type: boolean
+
+required: True
+
+Tiered Cache was used to serve this request (beta)
+
+[float]
+=== `ClientASN`
+
+type: integer
+
+required: True
+
+Client AS number
+
+[float]
+=== `ClientCountry`
+
+type: keyword
+
+required: True
+
+Country of the client IP address
+
+[float]
+=== `ClientDeviceType`
+
+type: keyword
+
+required: True
+
+Client device type
+
+[float]
+=== `ClientIP`
+
+type: ip
+
+required: True
+
+IP address of the client
+
+[float]
+=== `ClientIPClass`
+
+type: keyword
+
+required: True
+
+Client IP class
+
+[float]
+=== `ClientRequestBytes`
+
+type: integer
+
+required: True
+
+Number of bytes in the client request
+
+[float]
+=== `ClientRequestHost`
+
+type: keyword
+
+required: True
+
+Host requested by the client
+
+[float]
+=== `ClientRequestMethod`
+
+type: keyword
+
+required: True
+
+HTTP method of client request
+
+[float]
+=== `ClientRequestProtocol`
+
+type: keyword
+
+required: True
+
+HTTP protocol of client request
+
+[float]
+=== `ClientRequestReferer`
+
+type: keyword
+
+required: True
+
+HTTP request referrer
+
+[float]
+=== `ClientRequestURI`
+
+type: keyword
+
+required: True
+
+URI requested by the client
+
+[float]
+=== `ClientRequestUserAgent`
+
+type: keyword
+
+required: True
+
+User agent reported by the client
+
+[float]
+=== `ClientSSLCipher`
+
+type: text
+
+required: True
+
+Client SSL cipher
+
+[float]
+=== `ClientSSLProtocol`
+
+type: keyword
+
+required: True
+
+Client SSL (TLS) protocol
+
+[float]
+=== `ClientSrcPort`
+
+type: integer
+
+required: True
+
+Client source port
+
+[float]
+=== `EdgeColoID`
+
+type: short
+
+required: True
+
+Cloudflare edge colo id
+
+[float]
+=== `EdgeEndTimestamp`
+
+type: date
+
+format: epoch_millis
+
+required: True
+
+Unix nanosecond timestamp the edge finished sending response to the client
+
+[float]
+=== `EdgePathingOp`
+
+type: keyword
+
+required: True
+
+Indicates what type of response was issued for this request (unknown = no specific action)
+
+[float]
+=== `EdgePathingSrc`
+
+type: keyword
+
+required: True
+
+Details how the request was classified based on security checks (unknown = no specific classification)
+
+[float]
+=== `EdgePathingStatus`
+
+type: keyword
+
+required: True
+
+Indicates what data was used to determine the handling of this request (unknown = no data)
+
+[float]
+=== `EdgeRequestHost`
+
+type: keyword
+
+required: True
+
+Host header on the request from the edge to the origin (beta)
+
+[float]
+=== `EdgeResponseBytes`
+
+type: integer
+
+required: True
+
+Number of bytes returned by the edge to the client
+
+[float]
+=== `EdgeResponseCompressionRatio`
+
+type: integer
+
+required: True
+
+Edge response compression ratio
+
+[float]
+=== `EdgeResponseContentType`
+
+type: keyword
+
+required: True
+
+Edge response Content-Type header value (beta)
+
+[float]
+=== `EdgeResponseStatus`
+
+type: short
+
+required: True
+
+HTTP status code returned by Cloudflare to the client
+
+[float]
+=== `EdgeResponseTime`
+
+type: integer
+
+format: duration
+
+required: True
+
+Response time in ms of the edge server. This not only depends on the origin response time, but also on the client's connection.
+
+[float]
+=== `EdgeServerIP`
+
+type: ip
+
+required: True
+
+IP of the edge server making a request to the origin (beta)
+
+[float]
+=== `EdgeStartTimestamp`
+
+type: date
+
+format: epoch_millis
+
+required: True
+
+Timestamp the edge received request from the client
+
+[float]
+=== `OriginIP`
+
+type: ip
+
+required: True
+
+IP of the origin server
+
+[float]
+=== `OriginResponseBytes`
+
+type: integer
+
+required: True
+
+Number of bytes returned by the origin server
+
+[float]
+=== `OriginResponseHTTPExpires`
+
+type: keyword
+
+required: True
+
+Value of the origin 'expires' header in RFC1123 format
+
+[float]
+=== `OriginResponseHTTPLastModified`
+
+type: keyword
+
+required: True
+
+Value of the origin 'last-modified' header in RFC1123 format
+
+[float]
+=== `OriginResponseStatus`
+
+type: short
+
+required: True
+
+Status returned by the origin server
+
+[float]
+=== `OriginResponseTime`
+
+type: long
+
+format: duration
+
+required: True
+
+Number of nanoseconds it took the origin to return the response to edge
+
+[float]
+=== `OriginSSLProtocol`
+
+type: keyword
+
+required: True
+
+SSL (TLS) protocol used to connect to the origin (beta)
+
+[float]
+=== `RayID`
+
+type: keyword
+
+required: True
+
+Ray ID of the request
+
+[float]
+=== `SecurityLevel`
+
+type: keyword
+
+required: True
+
+The security level configured at the time of this request. This is used to determine the sensitivity of the IP Reputation system.
+
+[float]
+=== `WAFAction`
+
+type: keyword
+
+required: True
+
+Action taken by the WAF, if triggered
+
+[float]
+=== `WAFFlags`
+
+type: keyword
+
+required: True
+
+Additional configuration flags: simulate (0x1) | null
+
+[float]
+=== `WAFMatchedVar`
+
+type: keyword
+
+required: True
+
+The full name of the most-recently matched variable
+
+[float]
+=== `WAFProfile`
+
+type: keyword
+
+required: True
+
+WAF profile: low | med | high
+
+[float]
+=== `WAFRuleID`
+
+type: keyword
+
+required: True
+
+ID of the applied WAF rule
+
+[float]
+=== `WAFRuleMessage`
+
+type: keyword
+
+required: True
+
+Rule message associated with the triggered rule
+
+[float]
+=== `ZoneID`
+
+type: keyword
+
+required: True
+
+Internal zone ID
+
+[float]
+=== `Zone`
+
+type: keyword
+
+required: True
+
+Name of the zone the log was collected for
+

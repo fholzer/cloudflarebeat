@@ -1,0 +1,28 @@
+== Open ==
+* Consumer: In case the response is bigger than 1G, use received timestamp, which isn't available yet
+* Cloudflarebeat: Monitoring metrics
+* Consumer: Check fields provided in config for validity
+* Config: Make sure a zone isn't specified multiple times. Would probably break state in registry
+
+=== Consumer/State/Registry ===
+State has these properties:
+* ZoneID
+* StartTs
+* EndTs
+* Done
+* RetriesLeft
+
+Each consumer has a pool of workers. Consumers create State representing a log pull request and dispatch them to workers. They are also sent to the Registrar. (By whom?)
+Workers then pull the logs and send updated State to the Registrar. If the log pull fails, the retries counter is decremented. Once it reaches zero, that time
+frame won't be imported.
+
+When first started, consumers search for the most recent state, and use its EndTs as starting point, if within oldest_allowed. If there is no state,
+`now - oldest_allowed` is used. Furthermore, any States the are not `Done == true` are scheduled for retry, if within oldest_allowed.
+
+Should workers re-check log pull request? How to prevent falling behind? Maybe have worker check against oldest_allowed too?
+
+== Done ==
+* Consumer: Ensure RayID and EdgeStartTimestamp fields are requested! Delete them from event, if not specified by config
+* Registry: We really need one
+* Cloudflarebeat: Wait for all in-flight events to be ack'ed during shutdown
+* Consumer: Distribute logpull within ConsumerGroup. Start offset is (PullInterval / len(cg.Zones)) * i
