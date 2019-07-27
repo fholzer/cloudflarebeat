@@ -2,6 +2,7 @@ package logpull
 
 import (
 	"bytes"
+	"encoding/hex"
 	//"fmt"
 	"time"
 	//"encoding/json"
@@ -49,8 +50,8 @@ func (llp *LogLinePublisher) Write(p []byte) (n int, err error) {
 	var log map[string]interface{}
 	var json = jsoniter.ConfigCompatibleWithStandardLibrary
 	if err := json.Unmarshal(p, &log); err != nil {
-		llp.log.Errorf("Failed to parse log: %v", err)
-		llp.log.Warnf("Log data: %v", log)
+		llp.log.Errorf("Failed to parse log: %+v", err)
+		llp.log.Warnf("Log data: %+v", hex.Dump(p))
 		return len(p), nil
 	}
 

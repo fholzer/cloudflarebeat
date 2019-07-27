@@ -1,3 +1,20 @@
+// Licensed to Elasticsearch B.V. under one or more contributor
+// license agreements. See the NOTICE file distributed with
+// this work for additional information regarding copyright
+// ownership. Elasticsearch B.V. licenses this file to you under
+// the Apache License, Version 2.0 (the "License"); you may
+// not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing,
+// software distributed under the License is distributed on an
+// "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+// KIND, either express or implied.  See the License for the
+// specific language governing permissions and limitations
+// under the License.
+
 package channel
 
 import (
@@ -10,6 +27,7 @@ type outlet struct {
 	wg     eventCounter
 	client beat.Client
 	isOpen atomic.Bool
+	done   chan struct{}
 }
 
 func newOutlet(client beat.Client, wg eventCounter) *outlet {
@@ -17,6 +35,7 @@ func newOutlet(client beat.Client, wg eventCounter) *outlet {
 		wg:     wg,
 		client: client,
 		isOpen: atomic.MakeBool(true),
+		done:   make(chan struct{}),
 	}
 	return o
 }
@@ -24,9 +43,14 @@ func newOutlet(client beat.Client, wg eventCounter) *outlet {
 func (o *outlet) Close() error {
 	isOpen := o.isOpen.Swap(false)
 	if isOpen {
+		close(o.done)
 		return o.client.Close()
 	}
 	return nil
+}
+
+func (o *outlet) Done() <-chan struct{} {
+	return o.done
 }
 
 func (o *outlet) OnEvent(d *util.Data) bool {

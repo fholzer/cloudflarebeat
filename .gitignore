@@ -7,3 +7,4 @@
 /cloudflarebeat
 /cloudflarebeat.test
 *.pyc
+opt/

@@ -1,0 +1,43 @@
+{
+	"comment": "",
+	"ignore": "test",
+	"package": [
+		{
+			"checksumSHA1": "sol4uKNPci3jjrp8MnFR2kZZePk=",
+			"path": "github.com/cloudflare/cloudflare-go",
+			"revision": "b59d4f05eec361422b388c7ed74293ce8a3d5f97",
+			"revisionTime": "2019-07-18T18:12:19Z",
+			"version": "v0.9.4",
+			"versionExact": "v0.9.4"
+		},
+		{
+			"checksumSHA1": "22qXCagK5U3G8o/6uKwVJnUNp3g=",
+			"path": "github.com/fholzer/logshare",
+			"revision": "b08a08450293ab98362f4afb2337bc4c666ef586",
+			"revisionTime": "2018-05-04T17:48:36Z",
+			"version": "dont-write-line-breaks",
+			"versionExact": "dont-write-line-breaks"
+		},
+		{
+			"checksumSHA1": "4DgEcOv2o9NyZAHCbdS76mToqpU=",
+			"path": "github.com/json-iterator/go",
+			"revision": "27518f6661eba504be5a7a9a9f6d9460d892ade3",
+			"revisionTime": "2019-06-21T16:12:01Z",
+			"version": "v1.1.7",
+			"versionExact": "v1.1.7"
+		},
+		{
+			"checksumSHA1": "ZTcgWKWHsrX0RXYVXn5Xeb8Q0go=",
+			"path": "github.com/modern-go/concurrent",
+			"revision": "bacd9c7ef1dd9b15be4a9909b8ac7a4e313eec94",
+			"revisionTime": "2018-03-06T01:26:44Z"
+		},
+		{
+			"checksumSHA1": "qvH48wzTIV3QKSDqI0dLFtVjaDI=",
+			"path": "github.com/modern-go/reflect2",
+			"revision": "94122c33edd36123c84d5368cfb2b69df93a0ec8",
+			"revisionTime": "2018-07-18T01:23:57Z"
+		}
+	],
+	"rootPath": "github.com/fholzer/cloudflarebeat"
+}

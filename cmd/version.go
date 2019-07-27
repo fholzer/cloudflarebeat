@@ -1,3 +1,3 @@
 package cmd
 
-const appVersion = "6.2.6"
+const appVersion = "7.2.0"
