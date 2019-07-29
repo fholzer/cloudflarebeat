@@ -1,0 +1,71 @@
+cloudflarebeat:
+  # Credentials
+  api_email: '${CLOUDFLARE_API_EMAIL}'
+  api_key: '${CLOUDFLARE_API_KEY}'
+
+  consumers:
+    # small websites
+    - oldest_allowed: 24h
+      zones:
+        - ${CLOUDFLARE_ZONE}
+
+  # List of fields you want to be logged
+  # If necessary, fields can also be specified (or overridden)
+  # on consumer level.
+  fields:
+    - "CacheCacheStatus"
+    - "CacheResponseBytes"
+    - "CacheResponseStatus"
+    - "CacheTieredFill"
+    - "ClientASN"
+    - "ClientCountry"
+    - "ClientDeviceType"
+    - "ClientIP"
+    - "ClientIPClass"
+    - "ClientRequestBytes"
+    - "ClientRequestHost"
+    - "ClientRequestMethod"
+    - "ClientRequestProtocol"
+    - "ClientRequestReferer"
+    - "ClientRequestURI"
+    - "ClientRequestUserAgent"
+    - "ClientSSLCipher"
+    - "ClientSSLProtocol"
+    - "ClientSrcPort"
+    - "EdgeColoID"
+    - "EdgeEndTimestamp"
+    - "EdgePathingOp"
+    - "EdgePathingSrc"
+    - "EdgePathingStatus"
+    - "EdgeRequestHost"
+    - "EdgeResponseBytes"
+    - "EdgeResponseCompressionRatio"
+    - "EdgeResponseContentType"
+    - "EdgeResponseStatus"
+    - "EdgeServerIP"
+    - "EdgeStartTimestamp"
+    - "OriginIP"
+    - "OriginResponseBytes"
+    - "OriginResponseHTTPExpires"
+    - "OriginResponseHTTPLastModified"
+    - "OriginResponseStatus"
+    - "OriginResponseTime"
+    - "OriginSSLProtocol"
+    - "RayID"
+    - "SecurityLevel"
+    - "WAFAction"
+    - "WAFFlags"
+    - "WAFMatchedVar"
+    - "WAFProfile"
+    - "WAFRuleID"
+    - "WAFRuleMessage"
+    - "ZoneID"
+
+output.elasticsearch:
+  hosts: '${ELASTICSEARCH_HOSTS:elasticsearch:9200}'
+  username: '${ELASTICSEARCH_USERNAME:}'
+  password: '${ELASTICSEARCH_PASSWORD:}'
+
+processors:
+  - add_host_metadata: ~
+  - add_cloud_metadata: ~
