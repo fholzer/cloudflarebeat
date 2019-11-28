@@ -48,20 +48,22 @@ func newConsumer(cf *cloudflare.API, org *cloudflare.Organization, cgc *config.C
 		if err != nil {
 			return nil, err
 		}
-		if len(zones) < 1 {
-			return nil, fmt.Errorf("No zone found matching name '%q'", *zone)
-		}
 
-		matching := make([]cloudflare.Zone, 0)
+		var matching []cloudflare.Zone
 		if org != nil {
-			/*
-			   for _, i := range zones {
-			   }
-			*/
+			for _, zone := range zones {
+				if zone.Owner.ID == org.ID {
+					append(matching, zone)
+				}
+			}
 		} else {
 			matching = zones
 		}
-		if len(zones) > 1 {
+
+		if len(zones) < 1 {
+			return nil, fmt.Errorf("No zone found matching name '%q'", *zone)
+		}
+		if len(matching) > 1 {
 			return nil, fmt.Errorf("More than one zone matching criteria for '%q'", *zone)
 		}
 		z = &matching[0]
