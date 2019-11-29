@@ -53,7 +53,7 @@ func newConsumer(cf *cloudflare.API, org *cloudflare.Organization, cgc *config.C
 		if org != nil {
 			for _, zone := range zones {
 				if zone.Owner.ID == org.ID {
-					append(matching, zone)
+					matching = append(matching, zone)
 				}
 			}
 		} else {
